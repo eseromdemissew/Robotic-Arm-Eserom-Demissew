@@ -17,6 +17,8 @@ export default defineConfig({
       typescript: true,
     }),
   ],
+  // Instructs Vite to treat any APK file as a static asset rather than code
+  assetsInclude: ["**/*.apk"],
   server: {
     port: 3000,
     host: true,
