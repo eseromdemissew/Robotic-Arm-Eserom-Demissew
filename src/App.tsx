@@ -12,9 +12,17 @@ import {
   Moon, 
   Sun,
   Shield,
-  ExternalLink
+  ExternalLink,
+  Github,
+  Linkedin,
+  Mail
 } from 'lucide-react';
 import { toast, Toaster } from 'sonner';
+
+// --- Static Asset Import ---
+// This tells Vite to bundle the APK file from your main root directory
+// @ts-ignore
+import apkUrl from '../Robotic_Arm_Control.apk'; 
 
 // --- Constants ---
 const PRIMARY_BLUE = '#3b82f6';
@@ -38,7 +46,7 @@ const Navbar = ({ isDark, setIsDark }: { isDark: boolean, setIsDark: (v: boolean
     { name: 'Roadmap', href: '#roadmap' },
     { name: 'App', href: '#app' },
     { name: 'Tech', href: '#tech' },
-    { name: 'About', href: '#about' },
+    { name: 'Architecture', href: '#architecture' },
   ];
 
   return (
@@ -78,7 +86,9 @@ const Navbar = ({ isDark, setIsDark }: { isDark: boolean, setIsDark: (v: boolean
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           <a 
-            href="./Robotic_Arm_Control.apk" 
+            href={apkUrl} 
+            download="Robotic_Arm_Control.apk"
+            onClick={() => toast.success("Starting App Download...")}
             className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-sm font-semibold transition-all shadow-lg shadow-blue-600/20 active:scale-95"
           >
             Download App
@@ -127,8 +137,12 @@ const Navbar = ({ isDark, setIsDark }: { isDark: boolean, setIsDark: (v: boolean
                 </a>
               ))}
               <a 
-                href="./Robotic_Arm_Control.apk"
-                onClick={() => setIsOpen(false)}
+                href={apkUrl}
+                download="Robotic_Arm_Control.apk"
+                onClick={() => {
+                  setIsOpen(false);
+                  toast.success("Starting App Download...");
+                }}
                 className="mt-4 px-8 py-4 bg-blue-600 text-white rounded-2xl text-xl font-bold text-center shadow-xl shadow-blue-600/30"
               >
                 Download App
@@ -279,7 +293,7 @@ const ArmCanvas = ({ isDark }: { isDark: boolean }) => {
   return <canvas ref={canvasRef} className="w-full h-[400px] md:h-[500px]" />;
 };
 
-const Hero = ({ isDark }: { isDark: boolean }) => {
+const Hero = () => {
   return (
     <section className="relative min-h-screen pt-32 pb-20 overflow-hidden flex flex-col items-center justify-center">
       <div className="absolute inset-0 z-0">
@@ -308,7 +322,7 @@ const Hero = ({ isDark }: { isDark: boolean }) => {
             transition={{ delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            A production-grade 4-DOF robotic manipulator integrated with autonomous app control, automatic movement, and Low budget.
+            A production-grade 4-DOF robotic manipulator integrated with autonomous app control, automatic movement, and low budget constraints.
           </motion.p>
 
           <motion.div 
@@ -317,7 +331,12 @@ const Hero = ({ isDark }: { isDark: boolean }) => {
             transition={{ delay: 0.3 }}
             className="flex flex-wrap justify-center gap-4 mb-16"
           >
-            <a href="./Robotic_Arm_Control.apk" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold flex items-center gap-2 transition-all shadow-xl shadow-blue-600/25 active:scale-95">
+            <a 
+              href={apkUrl} 
+              download="Robotic_Arm_Control.apk"
+              onClick={() => toast.success("Starting App Download...")}
+              className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold flex items-center gap-2 transition-all shadow-xl shadow-blue-600/25 active:scale-95"
+            >
               <Download className="w-5 h-5" />
               Download App
             </a>
@@ -346,15 +365,6 @@ const Hero = ({ isDark }: { isDark: boolean }) => {
             ))}
           </motion.div>
         </div>
-
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 1 }}
-          className="mt-12"
-        >
-          <ArmCanvas isDark={isDark} />
-        </motion.div>
       </div>
     </section>
   );
@@ -365,20 +375,20 @@ const Features = () => {
     {
       icon: <Eye className="w-6 h-6" />,
       title: "App Control System",
-      desc: "Real-time object detection and spatial Control using bluetooth",
+      desc: "Real-time spatial manipulation and system control over Bluetooth interfaces.",
       tags: ["Bluetooth"]
     },
     {
       icon: <Mic className="w-6 h-6" />,
       title: "Ultrasonic Sensor",
-      desc: "Natural language processing interface for complex task execution and remote diagnostic commands.",
+      desc: "Automatic localized feedback looping allowing autonomous correction rules.",
       tags: ["Automatic"]
     },
     {
       icon: <Hand className="w-6 h-6" />,
       title: "Save and Run",
-      desc: "Intuitive teleoperation via smartphone.",
-      tags: ["Bluetooth"]
+      desc: "Record path sequences directly to storage matrices for repeated task loops.",
+      tags: ["EEPROM"]
     }
   ];
 
@@ -511,14 +521,14 @@ const OrbitalCanvas = ({ isDark }: { isDark: boolean }) => {
 const Specs = ({ isDark }: { isDark: boolean }) => {
   const specs = [
     { label: 'DOF', val: '4 Axes of Freedom' },
-    { label: 'Controller', val: 'Arduino Uno' },
-    { label: 'Motors', val: 'MG996R / SG90s Digital Servos' },
-    { label: 'Communication', val: 'HC-05' },
-    { label: 'Programming Language', val: 'C++' },
-    { label: 'Control', val: 'Application' },
-    { label: 'Power', val: '10V DC AC' },
-    { label: 'Material', val: 'PVC/Local Waste' },
-    { label: 'End Effector', val: 'Interchangeable Gripper' }
+    { label: 'Controller', val: 'Arduino Uno R3' },
+    { label: 'Motors', val: 'MG996R High Torque / SG90 Servos' },
+    { label: 'Communication', val: 'HC-05 Bluetooth Receiver' },
+    { label: 'Programming Language', val: 'Embedded C++' },
+    { label: 'Control Subsystem', val: 'Android Native Application' },
+    { label: 'Power Input', val: '5V - 6V DC External Supply' },
+    { label: 'Material Construction', val: 'Reinforced Structurals' },
+    { label: 'End Effector', val: 'Mechanized Variable Gripper' }
   ];
 
   return (
@@ -535,7 +545,7 @@ const Specs = ({ isDark }: { isDark: boolean }) => {
               {specs.map((spec, i) => (
                 <div key={i} className="flex justify-between items-center py-4 border-b border-border">
                   <span className="text-muted-foreground font-bold text-xs uppercase tracking-widest">{spec.label}</span>
-                  <span className="font-semibold text-sm">{spec.val}</span>
+                  <span className="font-semibold text-sm text-right">{spec.val}</span>
                 </div>
               ))}
             </div>
@@ -547,9 +557,9 @@ const Specs = ({ isDark }: { isDark: boolean }) => {
             viewport={{ once: true }}
             className="bg-muted/30 rounded-3xl p-8 relative overflow-hidden"
           >
-             <div className="absolute top-0 left-0 p-6">
-                <div className="text-blue-500 font-black text-xs uppercase tracking-tighter">Kinematics Visualization</div>
-                <div className="text-2xl font-bold">Inverse Kinematics 4-DOF</div>
+             <div className="absolute top-0 left-0 p-6 z-10">
+                <div className="text-blue-500 font-black text-xs uppercase tracking-tighter">Kinematics Node Array</div>
+                <div className="text-2xl font-bold">Inverse Link Vectors</div>
              </div>
              <OrbitalCanvas isDark={isDark} />
           </motion.div>
@@ -562,22 +572,22 @@ const Specs = ({ isDark }: { isDark: boolean }) => {
 const Roadmap = () => {
   const steps = [
     {
-      title: "Basic Servo Arm",
+      title: "Basic Servo Layout",
       phase: "Phase 1",
-      desc: "Fundamental 4-DOF design using Arduino and simple potentiometer control.",
-      tags: ["Arduino"]
+      desc: "Fundamental 4-DOF layout using basic breadboard components and variable resistance dials.",
+      tags: ["Prototyping"]
     },
     {
-      title: "Smartphone Interference",
+      title: "Smartphone Sync Loop",
       phase: "Phase 2",
-      desc: "Developed a Python GUI with Inverse Kinematics calculations and ESP32 integration.",
-      tags: ["App"]
+      desc: "Creation of serial processing maps connected to dynamic Android UI application layouts.",
+      tags: ["Firmware"]
     },
     {
-      title: "Autonomous Robotics",
+      title: "Fully Autonomous Sweeps",
       phase: "Phase 3",
-      desc: "Integration of ROS2 for obstacle avoidance and multi-task path planning.",
-      tags: ["USSR"]
+      desc: "Integration of smart sensors allowing dynamic object stacking routines without human input.",
+      tags: ["Automation"]
     }
   ];
 
@@ -585,7 +595,7 @@ const Roadmap = () => {
     <section id="roadmap" className="py-24 bg-muted/30">
       <div className="container mx-auto px-6 max-w-4xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-black mb-4">Development Roadmap</h2>
+          <h2 className="text-4xl font-black mb-4">Development Timeline</h2>
           <div className="w-20 h-1 bg-blue-500 mx-auto rounded-full" />
         </div>
 
@@ -661,7 +671,7 @@ const AppDownload = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
                     className="w-full h-full object-cover"
-                    alt="App Screenshot"
+                    alt="Control App Configuration Interface"
                   />
                 </AnimatePresence>
               </div>
@@ -674,7 +684,7 @@ const AppDownload = () => {
           <div className="order-1 lg:order-2">
             <h2 className="text-4xl font-black mb-6">Control in your Pocket</h2>
             <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-              Experience zero-latency control of your robotic arm. Our mobile application provides a real-time telemetry dashboard, visual feedback, and autonomous mission planning capabilities.
+              Experience zero-latency telemetry dashboard mappings. Quickly coordinate angular changes, save sequences, and check loop operations directly using wireless standard links.
             </p>
 
             <div className="grid gap-6 mb-10">
@@ -686,17 +696,15 @@ const AppDownload = () => {
                   <Download className="w-7 h-7" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg">Direct APK Download</h4>
-                  <p className="text-sm text-muted-foreground">Version 2.0 (Stable)</p>
+                  <h4 className="font-bold text-lg">Direct App Download</h4>
+                  <p className="text-sm text-muted-foreground font-medium">Robotic_Arm_Control.apk</p>
                   <a 
-                    href="./Robotic_Arm_Control.apk" 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      toast.info("Download would start here for 'robotic-arm.apk'");
-                    }}
+                    href={apkUrl} 
+                    download="Robotic_Arm_Control.apk"
+                    onClick={() => toast.success("Starting App Download...")}
                     className="text-blue-500 text-sm font-bold mt-2 inline-block hover:underline"
                   >
-                    Download Now
+                    Download Compiled Package
                   </a>
                 </div>
               </motion.div>
@@ -707,8 +715,7 @@ const AppDownload = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">Android Requirements</h4>
-                  <p className="text-sm text-muted-foreground">Minimum: Android 8.0 Oreo</p>
-                  <p className="text-[10px] text-muted-foreground mt-1 uppercase font-bold tracking-widest">Target: SDK 34</p>
+                  <p className="text-sm text-muted-foreground">Compatible with Android 8.0 up to Android 14 API level 34</p>
                 </div>
               </div>
 
@@ -717,13 +724,13 @@ const AppDownload = () => {
                   <ExternalLink className="w-7 h-7" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg">Setup Guide</h4>
-                  <p className="text-sm text-muted-foreground">Complete configuration walkthrough.</p>
+                  <h4 className="font-bold text-lg">Setup Walkthrough</h4>
+                  <p className="text-sm text-muted-foreground">Check interface linking sequences.</p>
                   <button 
-                    onClick={() => toast.success("Opening Documentation...")}
-                    className="text-blue-500 text-sm font-bold mt-2 inline-block hover:underline"
+                    onClick={() => toast.success("Opening system manual references...")}
+                    className="text-blue-500 text-sm font-bold mt-2 inline-block hover:underline text-left"
                   >
-                    View Guide
+                    View System Setup Reference
                   </button>
                 </div>
               </div>
@@ -731,7 +738,7 @@ const AppDownload = () => {
 
             <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-xl">
                <p className="text-xs text-orange-600 dark:text-orange-400 font-medium">
-                  <strong>Note:</strong> Since this is a specialized tool, you must enable "Install from Unknown Sources" in your Android settings to install the APK.
+                  <strong>Installation Flag:</strong> As this package runs directly outside common retail frameworks, enabling package loading permissions under internal device settings handles safe initialization.
                </p>
             </div>
           </div>
@@ -743,17 +750,17 @@ const AppDownload = () => {
 
 const TechStack = () => {
   const techs = [
-    { name: 'HC-05', cat: 'Bluetooth Module', icon: '🐍' },
-    { name: 'C++', cat: 'Arduino Code', icon: '⚙️' },
-    { name: 'Arduino Uno', cat: 'Micro Controller', icon: '🤖' },
-    { name: 'USSR', cat: 'Ultrasonic Sensor', icon: '👁️' }
+    { name: 'HC-05 Link', cat: 'Bluetooth Subsystem', icon: '📡' },
+    { name: 'C++ Architecture', cat: 'Microcontroller Core', icon: '⚙️' },
+    { name: 'Arduino Uno R3', cat: 'Logic Processing Center', icon: '🤖' },
+    { name: 'Ultrasonic Array', cat: 'Proximity Metrics', icon: '👁️' }
   ];
 
   return (
     <section id="tech" className="py-24 bg-muted/30">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-black mb-4">The Tech Stack</h2>
+          <h2 className="text-4xl font-black mb-4">Core Tech Stack</h2>
           <div className="w-20 h-1 bg-blue-500 mx-auto rounded-full" />
         </div>
 
@@ -797,14 +804,14 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
     resize();
 
     const nodes = [
-      { id: 'cam', label: 'Sensor', x: 0.15, y: 0.2 },
-      { id: 'vision', label: 'Arduino', x: 0.35, y: 0.2 },
-      { id: 'cmd', label: 'Command', x: 0.2, y: 0.5 },
-      { id: 'move', label: 'Servo', x: 0.65, y: 0.6 }
+      { id: 'app', label: 'Mobile UI App', x: 0.15, y: 0.5 },
+      { id: 'hc05', label: 'HC-05 Bluetooth', x: 0.45, y: 0.3 },
+      { id: 'uno', label: 'Arduino processing Unit', x: 0.45, y: 0.7 },
+      { id: 'servos', label: '4x Servo Arrays', x: 0.8, y: 0.5 }
     ];
 
     const connections = [
-      ['cam', 'vision'], ['vision', 'cmd'], ['cmd', 'move']
+      ['app', 'hc05'], ['hc05', 'uno'], ['uno', 'servos']
     ];
 
     const particles: { connIdx: number, t: number, speed: number }[] = [];
@@ -812,7 +819,7 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
         particles.push({
             connIdx: Math.floor(Math.random() * connections.length),
             t: Math.random(),
-            speed: 0.002 + Math.random() * 0.003
+            speed: 0.003 + Math.random() * 0.004
         });
     }
 
@@ -845,7 +852,7 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
         const pY = n1.y * h + (n2.y * h - n1.y * h) * p.t;
 
         ctx.beginPath();
-        ctx.arc(pX, pY, 3, 0, Math.PI * 2);
+        ctx.arc(pX, pY, 4, 0, Math.PI * 2);
         ctx.fillStyle = PRIMARY_BLUE;
         ctx.fill();
       });
@@ -856,9 +863,10 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
         ctx.fillStyle = SECONDARY_CYAN;
         ctx.fill();
 
-        ctx.font = '10px Poppins';
-        ctx.fillStyle = isDark ? '#ffffff' : '#000000';
-        ctx.fillText(n.label, n.x * w + 12, n.y * h + 4);
+        ctx.font = 'bold 11px Poppins';
+        ctx.fillStyle = isDark ? '#ffffff' : '#0f172a';
+        ctx.textAlign = 'left';
+        ctx.fillText(n.label, n.x * w + 15, n.y * h + 4);
       });
 
       animationFrameId = requestAnimationFrame(render);
@@ -871,7 +879,57 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
     };
   }, [isDark]);
 
-  return <canvas ref={canvasRef} className="w-full h-[300px]" />;
+  return <canvas ref={canvasRef} className="w-full h-[350px]" />;
+};
+
+const Footer = () => {
+  return (
+    <footer className="border-t border-border bg-background transition-colors duration-300">
+      <div className="container mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <div className="md:col-span-2 space-y-4">
+            <div className="flex items-center gap-2">
+              <Cpu className="w-6 h-6 text-blue-500" />
+              <span className="text-lg font-bold tracking-tight">
+                Robotic <span className="text-blue-500">Arm Manipulator</span>
+              </span>
+            </div>
+            <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
+              An accessible open-source project building 4-DOF custom hardware implementations coupled with fully isolated responsive user control applications.
+            </p>
+          </div>
+          
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Quick Links</h4>
+            <ul className="space-y-2 text-sm font-medium">
+              <li><a href="#features" className="text-muted-foreground hover:text-blue-500 transition-colors">System Capabilities</a></li>
+              <li><a href="#specs" className="text-muted-foreground hover:text-blue-500 transition-colors">Specifications</a></li>
+              <li><a href="#app" className="text-muted-foreground hover:text-blue-500 transition-colors">Application File Download</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Repository Contact</h4>
+            <div className="flex gap-4">
+              <a href="#" className="p-2 rounded-xl bg-muted hover:bg-blue-500/10 hover:text-blue-500 transition-all" aria-label="Github Link"><Github className="w-5 h-5" /></a>
+              <a href="#" className="p-2 rounded-xl bg-muted hover:bg-blue-500/10 hover:text-blue-500 transition-all" aria-label="LinkedIn Link"><Linkedin className="w-5 h-5" /></a>
+              <a href="#" className="p-2 rounded-xl bg-muted hover:bg-blue-500/10 hover:text-blue-500 transition-all" aria-label="Mail Contact"><Mail className="w-5 h-5" /></a>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-muted-foreground">
+            &copy; {new Date().getFullYear()} Robotic Arm System Environment. Built open source.
+          </p>
+          <div className="flex gap-6 text-xs text-muted-foreground font-medium">
+            <a href="#" className="hover:text-blue-500 transition-colors">Hardware Schematics</a>
+            <a href="#" className="hover:text-blue-500 transition-colors">Software Licenses</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default function App() {
@@ -881,18 +939,37 @@ export default function App() {
     <div className={isDark ? 'dark bg-slate-950 text-slate-50' : 'bg-white text-slate-900'}>
       <Toaster position="bottom-right" richColors />
       <Navbar isDark={isDark} setIsDark={setIsDark} />
-      <Hero isDark={isDark} />
-      <Features />
-      <Specs isDark={isDark} />
-      <Roadmap />
-      <AppDownload />
-      <TechStack />
-      <section id="about" className="py-24 border-t border-border">
-        <div className="container mx-auto px-6 max-w-xl text-center">
-          <h2 className="text-3xl font-bold mb-4">Architecture Topology</h2>
-          <ArchitectureCanvas isDark={isDark} />
+      
+      <main>
+        <Hero />
+        
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent blur-3xl rounded-full pointer-events-none" />
+            <ArmCanvas isDark={isDark} />
+          </div>
         </div>
-      </section>
+
+        <Features />
+        <Specs isDark={isDark} />
+        <Roadmap />
+        <AppDownload />
+        <TechStack />
+        
+        <section id="architecture" className="py-24 border-t border-border bg-muted/10">
+          <div className="container mx-auto px-6 max-w-3xl text-center">
+            <h2 className="text-3xl font-black mb-2">System Topology</h2>
+            <p className="text-sm text-muted-foreground mb-12 max-w-md mx-auto">
+              Real-time message routing tracking commands directly from application execution maps to individual structural servo motors.
+            </p>
+            <div className="bg-background border border-border rounded-3xl p-6 shadow-sm">
+              <ArchitectureCanvas isDark={isDark} />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
     </div>
   );
 }
