@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Cpu, 
   Eye, 
   Mic, 
   Hand, 
-  Navigation, 
-  Smartphone, 
   Download, 
   ChevronRight, 
   Menu, 
@@ -14,17 +12,7 @@ import {
   Moon, 
   Sun,
   Shield,
-  Zap,
-  Layers,
-  Activity,
-  Github,
-  Linkedin,
-  Mail,
-  ExternalLink,
-  Code2,
-  Terminal,
-  Settings,
-  Database
+  ExternalLink
 } from 'lucide-react';
 import { toast, Toaster } from 'sonner';
 
@@ -203,7 +191,6 @@ const ArmCanvas = ({ isDark }: { isDark: boolean }) => {
       ctx.lineCap = 'round';
       ctx.stroke();
 
-      // Dashed wire trace
       ctx.beginPath();
       ctx.setLineDash([5, 5]);
       ctx.moveTo(x1, y1 - 2);
@@ -245,22 +232,18 @@ const ArmCanvas = ({ isDark }: { isDark: boolean }) => {
         y: elbowPos.y + Math.sin(sAngle + eAngle + wAngle) * wristLen
       };
 
-      // Gripper
       const gAngle = Math.sin(time * 2) * 0.5 + 0.5;
       const gLen = 20;
 
-      // Render
       drawLink(basePos.x, basePos.y, shoulderPos.x, shoulderPos.y, 14);
       drawLink(shoulderPos.x, shoulderPos.y, elbowPos.x, elbowPos.y, 10);
       drawLink(elbowPos.x, elbowPos.y, wristPos.x, wristPos.y, 6);
 
-      // Gripper Parts
       const angle = sAngle + eAngle + wAngle;
       ctx.save();
       ctx.translate(wristPos.x, wristPos.y);
       ctx.rotate(angle);
       
-      // Upper Gripper
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(gLen, -5 - gAngle * 10);
@@ -268,7 +251,6 @@ const ArmCanvas = ({ isDark }: { isDark: boolean }) => {
       ctx.lineWidth = 3;
       ctx.stroke();
 
-      // Lower Gripper
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(gLen, 5 + gAngle * 10);
@@ -300,7 +282,6 @@ const ArmCanvas = ({ isDark }: { isDark: boolean }) => {
 const Hero = ({ isDark }: { isDark: boolean }) => {
   return (
     <section className="relative min-h-screen pt-32 pb-20 overflow-hidden flex flex-col items-center justify-center">
-      {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:40px_40px]" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 blur-[100px] rounded-full" />
@@ -309,7 +290,6 @@ const Hero = ({ isDark }: { isDark: boolean }) => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -328,7 +308,7 @@ const Hero = ({ isDark }: { isDark: boolean }) => {
             transition={{ delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            A production-grade 4-DOF robotic manipulator integrated with autonomous app control, automatic movement, and Low badget.
+            A production-grade 4-DOF robotic manipulator integrated with autonomous app control, automatic movement, and Low budget.
           </motion.p>
 
           <motion.div 
@@ -397,9 +377,11 @@ const Features = () => {
     {
       icon: <Hand className="w-6 h-6" />,
       title: "Save and Run",
-      desc: "Intuitve teleoperation via smartphone.",
+      desc: "Intuitive teleoperation via smartphone.",
       tags: ["Bluetooth"]
     }
+  ];
+
   return (
     <section id="features" className="py-24 bg-muted/30">
       <div className="container mx-auto px-6">
@@ -471,7 +453,6 @@ const OrbitalCanvas = ({ isDark }: { isDark: boolean }) => {
       const centerX = w / 2;
       const centerY = h / 2;
 
-      // Hub
       ctx.beginPath();
       ctx.arc(centerX, centerY, 30, 0, Math.PI * 2);
       ctx.fillStyle = isDark ? '#1e293b' : '#f1f5f9';
@@ -485,27 +466,23 @@ const OrbitalCanvas = ({ isDark }: { isDark: boolean }) => {
       ctx.textAlign = 'center';
       ctx.fillText('4 DOF', centerX, centerY + 5);
 
-      // Rings
       for (let i = 1; i <= 6; i++) {
         const radius = 40 + i * 25;
         const speed = 0.5 + (7 - i) * 0.2;
         const angle = time * speed;
 
-        // Orbit
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
         ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Arc Segment
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, angle, angle + Math.PI / 2);
         ctx.strokeStyle = i % 2 === 0 ? PRIMARY_BLUE : SECONDARY_CYAN;
         ctx.lineWidth = 3;
         ctx.stroke();
 
-        // Dot
         const dotX = centerX + Math.cos(angle) * radius;
         const dotY = centerY + Math.sin(angle) * radius;
         ctx.beginPath();
@@ -540,7 +517,7 @@ const Specs = ({ isDark }: { isDark: boolean }) => {
     { label: 'Programming Language', val: 'C++' },
     { label: 'Control', val: 'Application' },
     { label: 'Power', val: '10V DC AC' },
-      { label: 'Material', val: 'PVC/Local Waste' },
+    { label: 'Material', val: 'PVC/Local Waste' },
     { label: 'End Effector', val: 'Interchangeable Gripper' }
   ];
 
@@ -591,7 +568,7 @@ const Roadmap = () => {
       tags: ["Arduino"]
     },
     {
-      title: "Smartphone Interfrence",
+      title: "Smartphone Interference",
       phase: "Phase 2",
       desc: "Developed a Python GUI with Inverse Kinematics calculations and ESP32 integration.",
       tags: ["App"]
@@ -629,7 +606,7 @@ const Roadmap = () => {
               </div>
               
               <div className="bg-background border border-border p-6 rounded-2xl shadow-sm hover:border-blue-500/50 transition-all">
-                <div className={`text-blue-500 font-bold text-xs mb-2 ${i % 2 === 0 ? '' : ''}`}>{step.phase}</div>
+                <div className="text-blue-500 font-bold text-xs mb-2">{step.phase}</div>
                 <h3 className="text-xl font-bold mb-3">{step.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4">{step.desc}</p>
                 <div className={`flex flex-wrap gap-2 ${i % 2 === 0 ? 'md:justify-end' : ''}`}>
@@ -660,7 +637,7 @@ const AppDownload = () => {
       setActiveImage((prev) => (prev + 1) % images.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   return (
     <section id="app" className="py-24 overflow-hidden">
@@ -672,7 +649,7 @@ const AppDownload = () => {
             viewport={{ once: true }}
             className="order-2 lg:order-1"
           >
-            <div className="relative mx-auto w-[280px] h-[580px] bg-foreground rounded-[3rem] p-3 shadow-2xl animate-float">
+            <div className="relative mx-auto w-[280px] h-[580px] bg-foreground rounded-[3rem] p-3 shadow-2xl">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-foreground rounded-b-2xl z-20" />
               <div className="relative w-full h-full bg-background rounded-[2.2rem] overflow-hidden">
                 <AnimatePresence mode="wait">
@@ -688,7 +665,6 @@ const AppDownload = () => {
                   />
                 </AnimatePresence>
               </div>
-              {/* Phone Buttons */}
               <div className="absolute -left-1 top-24 w-1 h-12 bg-foreground/20 rounded-r" />
               <div className="absolute -left-1 top-40 w-1 h-12 bg-foreground/20 rounded-r" />
               <div className="absolute -right-1 top-32 w-1 h-16 bg-foreground/20 rounded-l" />
@@ -809,7 +785,6 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let time = 0;
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -833,7 +808,7 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
     ];
 
     const particles: { connIdx: number, t: number, speed: number }[] = [];
-    for(let i=0; i<15; i++) {
+    for(let i = 0; i < 15; i++) {
         particles.push({
             connIdx: Math.floor(Math.random() * connections.length),
             t: Math.random(),
@@ -842,12 +817,10 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
     }
 
     const render = () => {
-      time += 0.01;
       const w = canvas.width / window.devicePixelRatio;
       const h = canvas.height / window.devicePixelRatio;
       ctx.clearRect(0, 0, w, h);
 
-      // Draw connections
       connections.forEach((conn) => {
         const n1 = nodes.find(n => n.id === conn[0])!;
         const n2 = nodes.find(n => n.id === conn[1])!;
@@ -855,44 +828,37 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
         ctx.beginPath();
         ctx.moveTo(n1.x * w, n1.y * h);
         ctx.lineTo(n2.x * w, n2.y * h);
-        ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+        ctx.lineWidth = 2;
         ctx.stroke();
       });
 
-      // Draw particles
-      particles.forEach(p => {
+      particles.forEach((p) => {
         const conn = connections[p.connIdx];
         const n1 = nodes.find(n => n.id === conn[0])!;
         const n2 = nodes.find(n => n.id === conn[1])!;
-        
-        const px = (n1.x + (n2.x - n1.x) * p.t) * w;
-        const py = (n1.y + (n2.y - n1.y) * p.t) * h;
+
+        p.t += p.speed;
+        if (p.t > 1) p.t = 0;
+
+        const pX = n1.x * w + (n2.x * w - n1.x * w) * p.t;
+        const pY = n1.y * h + (n2.y * h - n1.y * h) * p.t;
 
         ctx.beginPath();
-        ctx.arc(px, py, 2, 0, Math.PI * 2);
+        ctx.arc(pX, pY, 3, 0, Math.PI * 2);
         ctx.fillStyle = PRIMARY_BLUE;
         ctx.fill();
-        
-        p.t += p.speed;
-        if(p.t > 1) p.t = 0;
       });
 
-      // Draw nodes
-      nodes.forEach(n => {
-        const nx = n.x * w;
-        const ny = n.y * h;
-        const pulse = Math.sin(time * 2) * 2;
-
+      nodes.forEach((n) => {
         ctx.beginPath();
-        ctx.arc(nx, ny, 6 + pulse, 0, Math.PI * 2);
-        ctx.fillStyle = PRIMARY_BLUE;
+        ctx.arc(n.x * w, n.y * h, 8, 0, Math.PI * 2);
+        ctx.fillStyle = SECONDARY_CYAN;
         ctx.fill();
 
-        ctx.font = 'bold 10px Poppins';
-        ctx.fillStyle = isDark ? '#94a3b8' : '#64748b';
-        ctx.textAlign = 'center';
-        ctx.fillText(n.label, nx, ny + 20);
+        ctx.font = '10px Poppins';
+        ctx.fillStyle = isDark ? '#ffffff' : '#000000';
+        ctx.fillText(n.label, n.x * w + 12, n.y * h + 4);
       });
 
       animationFrameId = requestAnimationFrame(render);
@@ -905,168 +871,28 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
     };
   }, [isDark]);
 
-  return <canvas ref={canvasRef} className="w-full h-[500px]" />;
+  return <canvas ref={canvasRef} className="w-full h-[300px]" />;
 };
-
-const About = ({ isDark }: { isDark: boolean }) => {
-  return (
-    <section id="about" className="py-24">
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div>
-            <h2 className="text-4xl font-black mb-8">Built by Eserom Demissew</h2>
-            <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
-              <p>
-                As a robotics enthusiast and software engineer, I developed this AI-powered robotic arm to bridge the gap between high-level machine learning and low-level hardware control. 
-              </p>
-              <p>
-                The project focuses on creating an affordable yet powerful platform for research in autonomous manipulation, leveraging modern frameworks like ROS2 and NVIDIA's edge computing tools.
-              </p>
-            </div>
-
-            <div className="grid gap-4 mt-12">
-               {[
-                 { title: "Competition Ready", desc: "Designed for high-stress performance environments." },
-                 { title: "Real-World Impact", desc: "Solving complex spatial sorting and assembly tasks." },
-                 { title: "Scalable Architecture", desc: "Modularity at the core for future sensor integration." }
-               ].map((item, i) => (
-                 <div key={i} className="flex gap-4 p-4 bg-muted/30 rounded-xl border border-border">
-                    <div className="w-2 h-auto bg-blue-500 rounded-full" />
-                    <div>
-                      <h4 className="font-bold">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
-                    </div>
-                 </div>
-               ))}
-            </div>
-          </div>
-
-          <div className="bg-muted/30 rounded-[2.5rem] p-8 border border-border relative">
-             <div className="absolute top-0 left-0 p-8">
-                <div className="text-blue-500 font-black text-xs uppercase tracking-widest mb-1">System Architecture</div>
-                <div className="text-2xl font-bold">Node Communication Graph</div>
-             </div>
-             <ArchitectureCanvas isDark={isDark} />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Footer = () => {
-  return (
-    <footer className="bg-background border-t border-border pt-20 pb-10">
-      <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-12 mb-20">
-          <div className="col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center">
-                <Cpu className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-2xl font-black">Robotic Arm</span>
-            </div>
-            <p className="text-muted-foreground max-w-sm mb-8 leading-relaxed">
-              Pushing the boundaries of collaborative robotics and autonomous machine learning. Developed by Eserom Demissew with a focus on precision, speed, and intelligence.
-            </p>
-            <div className="flex gap-4">
-              <a href="#" className="p-2 bg-muted rounded-full hover:bg-blue-500 hover:text-white transition-all"><Github className="w-5 h-5" /></a>
-              <a href="#" className="p-2 bg-muted rounded-full hover:bg-blue-500 hover:text-white transition-all"><Linkedin className="w-5 h-5" /></a>
-              <a href="#" className="p-2 bg-muted rounded-full hover:bg-blue-500 hover:text-white transition-all"><Mail className="w-5 h-5" /></a>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="font-bold mb-6 uppercase text-xs tracking-widest">Navigation</h4>
-            <ul className="space-y-4 text-sm font-medium text-muted-foreground">
-              <li><a href="#features" className="hover:text-blue-500">Features</a></li>
-              <li><a href="#specs" className="hover:text-blue-500">Specifications</a></li>
-              <li><a href="#roadmap" className="hover:text-blue-500">Roadmap</a></li>
-              <li><a href="./Robotic_Arm_Control.apk" className="hover:text-blue-500">Download App</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold mb-6 uppercase text-xs tracking-widest">Technologies</h4>
-            <ul className="space-y-4 text-sm font-medium text-muted-foreground">
-              <li><a href="https://www.arduino.cc/" className="hover:text-blue-500">Arduino</a></li>
-              <li><a href="https://appinventor.mit.edu/" className="hover:text-blue-500">MIT App Inventor</a></li>
-              <li><a href="https://isocpp.org/" className="hover:text-blue-500">C++</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-border gap-6">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} <span className="text-blue-500 font-bold" href="https://eserom.netlify.app">Eserom Demissew</span>. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-// --- Main App ---
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
 
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
-
   return (
-    <div className="min-h-screen bg-background text-foreground font-['Poppins'] transition-colors duration-500 selection:bg-blue-500 selection:text-white">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-        
-        html {
-          scroll-behavior: smooth;
-        }
-
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-20px); }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-          width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-          background: hsl(var(--background));
-        }
-        ::-webkit-scrollbar-thumb {
-          background: hsl(var(--border));
-          border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-          background: #3b82f6;
-        }
-      `}</style>
-
-      <Toaster position="bottom-right" theme={isDark ? 'dark' : 'light'} />
+    <div className={isDark ? 'dark bg-slate-950 text-slate-50' : 'bg-white text-slate-900'}>
+      <Toaster position="bottom-right" richColors />
       <Navbar isDark={isDark} setIsDark={setIsDark} />
-      
-      <main>
-        <Hero isDark={isDark} />
-        <Features />
-        <Specs isDark={isDark} />
-        <Roadmap />
-        <AppDownload />
-        <TechStack />
-        <About isDark={isDark} />
-      </main>
-
-      <Footer />
+      <Hero isDark={isDark} />
+      <Features />
+      <Specs isDark={isDark} />
+      <Roadmap />
+      <AppDownload />
+      <TechStack />
+      <section id="about" className="py-24 border-t border-border">
+        <div className="container mx-auto px-6 max-w-xl text-center">
+          <h2 className="text-3xl font-bold mb-4">Architecture Topology</h2>
+          <ArchitectureCanvas isDark={isDark} />
+        </div>
+      </section>
     </div>
   );
 }
