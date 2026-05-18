@@ -139,7 +139,7 @@ const Navbar = ({ isDark, setIsDark }: { isDark: boolean, setIsDark: (v: boolean
                 </a>
               ))}
               <a 
-                href="#app"
+                href="./Robotic_Arm_Control.apk"
                 onClick={() => setIsOpen(false)}
                 className="mt-4 px-8 py-4 bg-blue-600 text-white rounded-2xl text-xl font-bold text-center shadow-xl shadow-blue-600/30"
               >
@@ -309,17 +309,6 @@ const Hero = ({ isDark }: { isDark: boolean }) => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 text-xs font-bold uppercase tracking-wider mb-8"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            AI-Powered Robotic Arm · By Eserom Demissew
-          </motion.div>
 
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -339,7 +328,7 @@ const Hero = ({ isDark }: { isDark: boolean }) => {
             transition={{ delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            A production-grade 6-DOF robotic manipulator integrated with autonomous computer vision, voice commands, and ROS2 path planning.
+            A production-grade 4-DOF robotic manipulator integrated with autonomous app control, automatic movement, and Low badget.
           </motion.p>
 
           <motion.div 
@@ -348,7 +337,7 @@ const Hero = ({ isDark }: { isDark: boolean }) => {
             transition={{ delay: 0.3 }}
             className="flex flex-wrap justify-center gap-4 mb-16"
           >
-            <a href="#app" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold flex items-center gap-2 transition-all shadow-xl shadow-blue-600/25 active:scale-95">
+            <a href="./Robotic_Arm_Control.apk" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold flex items-center gap-2 transition-all shadow-xl shadow-blue-600/25 active:scale-95">
               <Download className="w-5 h-5" />
               Download App
             </a>
@@ -365,10 +354,10 @@ const Hero = ({ isDark }: { isDark: boolean }) => {
             className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto border-t border-border pt-12"
           >
             {[
-              { label: 'DOF', val: '6' },
-              { label: 'Vision', val: 'AI' },
-              { label: 'Stack', val: 'ROS2' },
-              { label: 'Rotation', val: '360°' }
+              { label: 'DOF', val: '4' },
+              { label: 'Instruction', val: 'Application' },
+              { label: 'Controller', val: 'Arduino Uno' },
+              { label: 'Rotation', val: '180°' }
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-2xl font-black text-blue-500">{stat.val}</div>
@@ -395,42 +384,22 @@ const Features = () => {
   const features = [
     {
       icon: <Eye className="w-6 h-6" />,
-      title: "AI Computer Vision",
-      desc: "Real-time object detection and spatial awareness using OpenCV, YOLOv8, and MediaPipe.",
-      tags: ["OpenCV", "YOLO", "MediaPipe"]
+      title: "App Control System",
+      desc: "Real-time object detection and spatial Control using bluetooth",
+      tags: ["Bluetooth"]
     },
     {
       icon: <Mic className="w-6 h-6" />,
-      title: "Voice Command",
+      title: "Ultrasonic Sensor",
       desc: "Natural language processing interface for complex task execution and remote diagnostic commands.",
-      tags: ["NLP", "Speech-to-Text", "Jarvis AI"]
+      tags: ["Automatic"]
     },
     {
       icon: <Hand className="w-6 h-6" />,
-      title: "Gesture Control",
-      desc: "Intuitve teleoperation via hand-tracking and skeletal mapping without physical controllers.",
-      tags: ["MediaPipe", "Teleop", "Real-time"]
-    },
-    {
-      icon: <Navigation className="w-6 h-6" />,
-      title: "Autonomous Learning",
-      desc: "Path planning and obstacle avoidance powered by ROS2 Navigation Stack and Reinforcement Learning.",
-      tags: ["ROS2", "MoveIt", "Path Planning"]
-    },
-    {
-      icon: <Activity className="w-6 h-6" />,
-      title: "6-DOF Precision",
-      desc: "High-precision inverse kinematics and PID control for sub-millimeter positioning accuracy.",
-      tags: ["Kinematics", "PID", "Encoders"]
-    },
-    {
-      icon: <Smartphone className="w-6 h-6" />,
-      title: "Mobile Ecosystem",
-      desc: "Cross-platform control app with real-time telemetry, video feed, and low-latency WiFi/BLE links.",
-      tags: ["Android", "ESP32", "WebSockets"]
+      title: "Save and Run",
+      desc: "Intuitve teleoperation via smartphone.",
+      tags: ["Bluetooth"]
     }
-  ];
-
   return (
     <section id="features" className="py-24 bg-muted/30">
       <div className="container mx-auto px-6">
@@ -514,7 +483,7 @@ const OrbitalCanvas = ({ isDark }: { isDark: boolean }) => {
       ctx.font = 'bold 12px Poppins';
       ctx.fillStyle = PRIMARY_BLUE;
       ctx.textAlign = 'center';
-      ctx.fillText('6 DOF', centerX, centerY + 5);
+      ctx.fillText('4 DOF', centerX, centerY + 5);
 
       // Rings
       for (let i = 1; i <= 6; i++) {
@@ -564,14 +533,14 @@ const OrbitalCanvas = ({ isDark }: { isDark: boolean }) => {
 
 const Specs = ({ isDark }: { isDark: boolean }) => {
   const specs = [
-    { label: 'DOF', val: '6 Axes of Freedom' },
-    { label: 'Controller', val: 'ESP32-S3 + Raspberry Pi 4' },
-    { label: 'Motors', val: 'MG996R / DS3218 Digital Servos' },
-    { label: 'Communication', val: 'WiFi (TCP/UDP) + BLE 5.0' },
-    { label: 'AI Framework', val: 'TensorFlow Lite + YOLOv8' },
-    { label: 'Vision', val: 'OAK-D / ESP32-Cam' },
-    { label: 'Power', val: '12V 5A DC / 2S LiPo' },
-    { label: 'Material', val: 'Carbon Fiber / 3D Printed PLA+' },
+    { label: 'DOF', val: '4 Axes of Freedom' },
+    { label: 'Controller', val: 'Arduino Uno' },
+    { label: 'Motors', val: 'MG996R / SG90s Digital Servos' },
+    { label: 'Communication', val: 'HC-05' },
+    { label: 'Programming Language', val: 'C++' },
+    { label: 'Control', val: 'Application' },
+    { label: 'Power', val: '10V DC AC' },
+      { label: 'Material', val: 'PVC/Local Waste' },
     { label: 'End Effector', val: 'Interchangeable Gripper' }
   ];
 
@@ -603,7 +572,7 @@ const Specs = ({ isDark }: { isDark: boolean }) => {
           >
              <div className="absolute top-0 left-0 p-6">
                 <div className="text-blue-500 font-black text-xs uppercase tracking-tighter">Kinematics Visualization</div>
-                <div className="text-2xl font-bold">Inverse Kinematics 6-DOF</div>
+                <div className="text-2xl font-bold">Inverse Kinematics 4-DOF</div>
              </div>
              <OrbitalCanvas isDark={isDark} />
           </motion.div>
@@ -618,32 +587,20 @@ const Roadmap = () => {
     {
       title: "Basic Servo Arm",
       phase: "Phase 1",
-      desc: "Fundamental 3-DOF design using Arduino and simple potentiometer control.",
-      tags: ["Arduino", "PWM", "CAD"]
+      desc: "Fundamental 4-DOF design using Arduino and simple potentiometer control.",
+      tags: ["Arduino"]
     },
     {
-      title: "Computer Interface",
+      title: "Smartphone Interfrence",
       phase: "Phase 2",
       desc: "Developed a Python GUI with Inverse Kinematics calculations and ESP32 integration.",
-      tags: ["Python", "ESP32", "IK"]
-    },
-    {
-      title: "AI Computer Vision",
-      phase: "Phase 3",
-      desc: "Real-time object tracking and automated sorting using YOLO and OpenCV.",
-      tags: ["YOLO", "OpenCV", "Sorting"]
+      tags: ["App"]
     },
     {
       title: "Autonomous Robotics",
-      phase: "Phase 4",
+      phase: "Phase 3",
       desc: "Integration of ROS2 for obstacle avoidance and multi-task path planning.",
-      tags: ["ROS2", "SLAM", "Path Planning"]
-    },
-    {
-      title: "Full Jarvis Integration",
-      phase: "Phase 5",
-      desc: "Voice control system for natural language interaction and multi-modal command execution.",
-      tags: ["Voice AI", "LLM", "Jarvis"]
+      tags: ["USSR"]
     }
   ];
 
@@ -754,9 +711,9 @@ const AppDownload = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">Direct APK Download</h4>
-                  <p className="text-sm text-muted-foreground">Version 2.4.0 (Stable)</p>
+                  <p className="text-sm text-muted-foreground">Version 2.0 (Stable)</p>
                   <a 
-                    href="robotic-arm.apk" 
+                    href="./Robotic_Arm_Control.apk" 
                     onClick={(e) => {
                       e.preventDefault();
                       toast.info("Download would start here for 'robotic-arm.apk'");
@@ -810,14 +767,10 @@ const AppDownload = () => {
 
 const TechStack = () => {
   const techs = [
-    { name: 'Python', cat: 'AI/Control', icon: '🐍' },
-    { name: 'C++', cat: 'Firmware', icon: '⚙️' },
-    { name: 'ROS2', cat: 'Middle-ware', icon: '🤖' },
-    { name: 'OpenCV', cat: 'Vision', icon: '👁️' },
-    { name: 'ESP32', cat: 'Microcontroller', icon: '⚡' },
-    { name: 'Raspberry Pi', cat: 'Edge AI', icon: '🍓' },
-    { name: 'YOLOv8', cat: 'Detection', icon: '🎯' },
-    { name: 'MediaPipe', cat: 'Tracking', icon: '🖐️' }
+    { name: 'HC-05', cat: 'Bluetooth Module', icon: '🐍' },
+    { name: 'C++', cat: 'Arduino Code', icon: '⚙️' },
+    { name: 'Arduino Uno', cat: 'Micro Controller', icon: '🤖' },
+    { name: 'USSR', cat: 'Ultrasonic Sensor', icon: '👁️' }
   ];
 
   return (
@@ -869,20 +822,14 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
     resize();
 
     const nodes = [
-      { id: 'cam', label: 'Camera', x: 0.15, y: 0.2 },
-      { id: 'vision', label: 'AI Vision', x: 0.35, y: 0.2 },
-      { id: 'pi', label: 'Raspberry Pi', x: 0.5, y: 0.4 },
+      { id: 'cam', label: 'Sensor', x: 0.15, y: 0.2 },
+      { id: 'vision', label: 'Arduino', x: 0.35, y: 0.2 },
       { id: 'cmd', label: 'Command', x: 0.2, y: 0.5 },
-      { id: 'esp', label: 'ESP32', x: 0.65, y: 0.6 },
-      { id: 'motors', label: 'Motors', x: 0.8, y: 0.7 },
-      { id: 'arm', label: 'Arm', x: 0.85, y: 0.4 },
-      { id: 'voice', label: 'Voice AI', x: 0.15, y: 0.75 },
-      { id: 'jarvis', label: 'Jarvis', x: 0.35, y: 0.8 }
+      { id: 'move', label: 'Servo', x: 0.65, y: 0.6 }
     ];
 
     const connections = [
-      ['cam', 'vision'], ['vision', 'pi'], ['pi', 'esp'], ['esp', 'motors'], 
-      ['motors', 'arm'], ['voice', 'jarvis'], ['jarvis', 'pi'], ['cmd', 'pi']
+      ['cam', 'vision'], ['vision', 'cmd'], ['cmd', 'move']
     ];
 
     const particles: { connIdx: number, t: number, speed: number }[] = [];
@@ -1035,29 +982,24 @@ const Footer = () => {
               <li><a href="#features" className="hover:text-blue-500">Features</a></li>
               <li><a href="#specs" className="hover:text-blue-500">Specifications</a></li>
               <li><a href="#roadmap" className="hover:text-blue-500">Roadmap</a></li>
-              <li><a href="#app" className="hover:text-blue-500">Download App</a></li>
+              <li><a href="./Robotic_Arm_Control.apk" className="hover:text-blue-500">Download App</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold mb-6 uppercase text-xs tracking-widest">Technologies</h4>
             <ul className="space-y-4 text-sm font-medium text-muted-foreground">
-              <li><a href="#" className="hover:text-blue-500">ROS2 Galactic</a></li>
-              <li><a href="#" className="hover:text-blue-500">Python 3.10</a></li>
-              <li><a href="#" className="hover:text-blue-500">ESP-IDF</a></li>
-              <li><a href="#" className="hover:text-blue-500">TensorFlow</a></li>
+              <li><a href="#" className="hover:text-blue-500">Arduino</a></li>
+              <li><a href="#" className="hover:text-blue-500">MIT App Inventors</a></li>
+              <li><a href="#" className="hover:text-blue-500">C++</a></li>
             </ul>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-border gap-6">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} <span className="text-blue-500 font-bold">Eserom Demissew</span>. All rights reserved.
+            © {new Date().getFullYear()} <span className="text-blue-500 font-bold" href="https://eserom.netlify.app">Eserom Demissew</span>. All rights reserved.
           </p>
-          <div className="flex gap-8 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-             <a href="#" className="hover:text-blue-500">Privacy Policy</a>
-             <a href="#" className="hover:text-blue-500">Terms of Service</a>
-          </div>
         </div>
       </div>
     </footer>
