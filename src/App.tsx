@@ -90,7 +90,7 @@ const Navbar = ({ isDark, setIsDark }: { isDark: boolean, setIsDark: (v: boolean
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           <a 
-            href="Robotic_Arm_Control.apk" 
+            href="./Robotic_Arm_Control.apk" 
             className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-sm font-semibold transition-all shadow-lg shadow-blue-600/20 active:scale-95"
           >
             Download App
@@ -989,9 +989,9 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-6 uppercase text-xs tracking-widest">Technologies</h4>
             <ul className="space-y-4 text-sm font-medium text-muted-foreground">
-              <li><a href="#" className="hover:text-blue-500">Arduino</a></li>
-              <li><a href="#" className="hover:text-blue-500">MIT App Inventors</a></li>
-              <li><a href="#" className="hover:text-blue-500">C++</a></li>
+              <li><a href="https://www.arduino.cc/" className="hover:text-blue-500">Arduino</a></li>
+              <li><a href="https://appinventor.mit.edu/" className="hover:text-blue-500">MIT App Inventor</a></li>
+              <li><a href="https://isocpp.org/" className="hover:text-blue-500">C++</a></li>
             </ul>
           </div>
         </div>
