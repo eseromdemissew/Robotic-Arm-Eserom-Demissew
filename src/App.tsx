@@ -20,9 +20,9 @@ import {
 import { toast, Toaster } from 'sonner';
 
 // --- Static Asset Import ---
-// This tells Vite to bundle the APK file from your main root directory
+// This instructs Vite to bundle the APK file directly from your current directory
 // @ts-ignore
-import apkUrl from '../Robotic_Arm_Control.apk'; 
+import apkUrl from './Robotic_Arm_Control.apk'; 
 
 // --- Constants ---
 const PRIMARY_BLUE = '#3b82f6';
@@ -322,7 +322,7 @@ const Hero = () => {
             transition={{ delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
           >
-            A production-grade 4-DOF robotic manipulator integrated with autonomous app control, automatic movement, and low budget constraints.
+            A production-grade 4-DOF robotic manipulator integrated with autonomous app control, automatic movement, and localized feedback systems.
           </motion.p>
 
           <motion.div 
@@ -375,19 +375,19 @@ const Features = () => {
     {
       icon: <Eye className="w-6 h-6" />,
       title: "App Control System",
-      desc: "Real-time spatial manipulation and system control over Bluetooth interfaces.",
+      desc: "Real-time spatial manipulation and telemetry sync utilizing secure Bluetooth streaming links.",
       tags: ["Bluetooth"]
     },
     {
       icon: <Mic className="w-6 h-6" />,
       title: "Ultrasonic Sensor",
-      desc: "Automatic localized feedback looping allowing autonomous correction rules.",
+      desc: "Automatic object detection buffers enabling dynamic obstacle routing and distance calculations.",
       tags: ["Automatic"]
     },
     {
       icon: <Hand className="w-6 h-6" />,
       title: "Save and Run",
-      desc: "Record path sequences directly to storage matrices for repeated task loops.",
+      desc: "Record sequence loops natively onto onboard memory matrices for persistent offline operation.",
       tags: ["EEPROM"]
     }
   ];
@@ -522,13 +522,13 @@ const Specs = ({ isDark }: { isDark: boolean }) => {
   const specs = [
     { label: 'DOF', val: '4 Axes of Freedom' },
     { label: 'Controller', val: 'Arduino Uno R3' },
-    { label: 'Motors', val: 'MG996R High Torque / SG90 Servos' },
-    { label: 'Communication', val: 'HC-05 Bluetooth Receiver' },
+    { label: 'Motors', val: 'MG996R Metal Gear / SG90 Servos' },
+    { label: 'Communication', val: 'HC-05 Bluetooth Module' },
     { label: 'Programming Language', val: 'Embedded C++' },
-    { label: 'Control Subsystem', val: 'Android Native Application' },
-    { label: 'Power Input', val: '5V - 6V DC External Supply' },
-    { label: 'Material Construction', val: 'Reinforced Structurals' },
-    { label: 'End Effector', val: 'Mechanized Variable Gripper' }
+    { label: 'Control Systems', val: 'Android Native Application' },
+    { label: 'Power Mapping', val: '5V - 6V DC External Input' },
+    { label: 'Material Structural', val: 'High-Density Reinforced Composites' },
+    { label: 'End Effector', val: 'Interchangeable Mechanical Gripper' }
   ];
 
   return (
@@ -558,8 +558,8 @@ const Specs = ({ isDark }: { isDark: boolean }) => {
             className="bg-muted/30 rounded-3xl p-8 relative overflow-hidden"
           >
              <div className="absolute top-0 left-0 p-6 z-10">
-                <div className="text-blue-500 font-black text-xs uppercase tracking-tighter">Kinematics Node Array</div>
-                <div className="text-2xl font-bold">Inverse Link Vectors</div>
+                <div className="text-blue-500 font-black text-xs uppercase tracking-tighter">Kinematics Visualization</div>
+                <div className="text-2xl font-bold">Inverse Vector Linkages</div>
              </div>
              <OrbitalCanvas isDark={isDark} />
           </motion.div>
@@ -572,22 +572,22 @@ const Specs = ({ isDark }: { isDark: boolean }) => {
 const Roadmap = () => {
   const steps = [
     {
-      title: "Basic Servo Layout",
+      title: "Basic Servo Arm Configuration",
       phase: "Phase 1",
-      desc: "Fundamental 4-DOF layout using basic breadboard components and variable resistance dials.",
-      tags: ["Prototyping"]
+      desc: "Fundamental structural layout tracking joint paths via simple localized manual feedback dials.",
+      tags: ["Hardware Design"]
     },
     {
-      title: "Smartphone Sync Loop",
+      title: "Smartphone Bluetooth Sync",
       phase: "Phase 2",
-      desc: "Creation of serial processing maps connected to dynamic Android UI application layouts.",
-      tags: ["Firmware"]
+      desc: "Creating custom data translation pipelines that parse real-time incoming application streams.",
+      tags: ["Firmware Map"]
     },
     {
-      title: "Fully Autonomous Sweeps",
+      title: "Autonomous Processing Loops",
       phase: "Phase 3",
-      desc: "Integration of smart sensors allowing dynamic object stacking routines without human input.",
-      tags: ["Automation"]
+      desc: "Synchronizing sensory loops for closed-circuit spatial picking routines without human triggers.",
+      tags: ["Automation Core"]
     }
   ];
 
@@ -595,7 +595,7 @@ const Roadmap = () => {
     <section id="roadmap" className="py-24 bg-muted/30">
       <div className="container mx-auto px-6 max-w-4xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-black mb-4">Development Timeline</h2>
+          <h2 className="text-4xl font-black mb-4">Project Development Roadmap</h2>
           <div className="w-20 h-1 bg-blue-500 mx-auto rounded-full" />
         </div>
 
@@ -671,7 +671,7 @@ const AppDownload = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
                     className="w-full h-full object-cover"
-                    alt="Control App Configuration Interface"
+                    alt="Application Interface Matrix"
                   />
                 </AnimatePresence>
               </div>
@@ -684,7 +684,7 @@ const AppDownload = () => {
           <div className="order-1 lg:order-2">
             <h2 className="text-4xl font-black mb-6">Control in your Pocket</h2>
             <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-              Experience zero-latency telemetry dashboard mappings. Quickly coordinate angular changes, save sequences, and check loop operations directly using wireless standard links.
+              Experience zero-latency mapping sequences. Instantly adjust specific rotational angles, save automated routines, and execute immediate macro pick paths seamlessly using your device.
             </p>
 
             <div className="grid gap-6 mb-10">
@@ -696,7 +696,7 @@ const AppDownload = () => {
                   <Download className="w-7 h-7" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg">Direct App Download</h4>
+                  <h4 className="font-bold text-lg">Direct APK Package Download</h4>
                   <p className="text-sm text-muted-foreground font-medium">Robotic_Arm_Control.apk</p>
                   <a 
                     href={apkUrl} 
@@ -704,7 +704,7 @@ const AppDownload = () => {
                     onClick={() => toast.success("Starting App Download...")}
                     className="text-blue-500 text-sm font-bold mt-2 inline-block hover:underline"
                   >
-                    Download Compiled Package
+                    Download Compiled Resource Bundle
                   </a>
                 </div>
               </motion.div>
@@ -714,8 +714,8 @@ const AppDownload = () => {
                   <Shield className="w-7 h-7" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg">Android Requirements</h4>
-                  <p className="text-sm text-muted-foreground">Compatible with Android 8.0 up to Android 14 API level 34</p>
+                  <h4 className="font-bold text-lg">Android Operating Minimums</h4>
+                  <p className="text-sm text-muted-foreground">Compatible with Android 8.0 up to Android 14 (Target SDK 34)</p>
                 </div>
               </div>
 
@@ -724,13 +724,13 @@ const AppDownload = () => {
                   <ExternalLink className="w-7 h-7" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg">Setup Walkthrough</h4>
-                  <p className="text-sm text-muted-foreground">Check interface linking sequences.</p>
+                  <h4 className="font-bold text-lg">Hardware Deployment Guide</h4>
+                  <p className="text-sm text-muted-foreground">Complete blueprint setup and pairing rules.</p>
                   <button 
-                    onClick={() => toast.success("Opening system manual references...")}
+                    onClick={() => toast.success("Loading schematic references...")}
                     className="text-blue-500 text-sm font-bold mt-2 inline-block hover:underline text-left"
                   >
-                    View System Setup Reference
+                    View System Setup Reference Documentation
                   </button>
                 </div>
               </div>
@@ -738,7 +738,7 @@ const AppDownload = () => {
 
             <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-xl">
                <p className="text-xs text-orange-600 dark:text-orange-400 font-medium">
-                  <strong>Installation Flag:</strong> As this package runs directly outside common retail frameworks, enabling package loading permissions under internal device settings handles safe initialization.
+                  <strong>Installation Parameter:</strong> Because this application loads natively, authorizing package execution under unknown origins inside standard security submenus configures operational readiness.
                </p>
             </div>
           </div>
@@ -750,10 +750,10 @@ const AppDownload = () => {
 
 const TechStack = () => {
   const techs = [
-    { name: 'HC-05 Link', cat: 'Bluetooth Subsystem', icon: '📡' },
-    { name: 'C++ Architecture', cat: 'Microcontroller Core', icon: '⚙️' },
-    { name: 'Arduino Uno R3', cat: 'Logic Processing Center', icon: '🤖' },
-    { name: 'Ultrasonic Array', cat: 'Proximity Metrics', icon: '👁️' }
+    { name: 'HC-05 Stream', cat: 'Wireless Communications', icon: '📡' },
+    { name: 'Embedded C++', cat: 'Firmware Architecture', icon: '⚙️' },
+    { name: 'Arduino Uno R3', cat: 'Central Processing Hub', icon: '🤖' },
+    { name: 'Ultrasonic Array', cat: 'Proximity Infrastructure', icon: '👁️' }
   ];
 
   return (
@@ -804,10 +804,10 @@ const ArchitectureCanvas = ({ isDark }: { isDark: boolean }) => {
     resize();
 
     const nodes = [
-      { id: 'app', label: 'Mobile UI App', x: 0.15, y: 0.5 },
-      { id: 'hc05', label: 'HC-05 Bluetooth', x: 0.45, y: 0.3 },
-      { id: 'uno', label: 'Arduino processing Unit', x: 0.45, y: 0.7 },
-      { id: 'servos', label: '4x Servo Arrays', x: 0.8, y: 0.5 }
+      { id: 'app', label: 'Mobile Control App', x: 0.15, y: 0.5 },
+      { id: 'hc05', label: 'HC-05 Bluetooth Receiver', x: 0.45, y: 0.3 },
+      { id: 'uno', label: 'Arduino processing Hub', x: 0.45, y: 0.7 },
+      { id: 'servos', label: '4x Active Servo Arrays', x: 0.8, y: 0.5 }
     ];
 
     const connections = [
@@ -891,40 +891,40 @@ const Footer = () => {
             <div className="flex items-center gap-2">
               <Cpu className="w-6 h-6 text-blue-500" />
               <span className="text-lg font-bold tracking-tight">
-                Robotic <span className="text-blue-500">Arm Manipulator</span>
+                Robotic <span className="text-blue-500">Arm Interface</span>
               </span>
             </div>
             <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
-              An accessible open-source project building 4-DOF custom hardware implementations coupled with fully isolated responsive user control applications.
+              An open platform implementing customized hardware configurations coupled with fully modular mobile execution systems.
             </p>
           </div>
           
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Quick Links</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Navigation</h4>
             <ul className="space-y-2 text-sm font-medium">
-              <li><a href="#features" className="text-muted-foreground hover:text-blue-500 transition-colors">System Capabilities</a></li>
+              <li><a href="#features" className="text-muted-foreground hover:text-blue-500 transition-colors">Core Features</a></li>
               <li><a href="#specs" className="text-muted-foreground hover:text-blue-500 transition-colors">Specifications</a></li>
-              <li><a href="#app" className="text-muted-foreground hover:text-blue-500 transition-colors">Application File Download</a></li>
+              <li><a href="#app" className="text-muted-foreground hover:text-blue-500 transition-colors">App Bundle Download</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Repository Contact</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Connect With Project</h4>
             <div className="flex gap-4">
-              <a href="#" className="p-2 rounded-xl bg-muted hover:bg-blue-500/10 hover:text-blue-500 transition-all" aria-label="Github Link"><Github className="w-5 h-5" /></a>
-              <a href="#" className="p-2 rounded-xl bg-muted hover:bg-blue-500/10 hover:text-blue-500 transition-all" aria-label="LinkedIn Link"><Linkedin className="w-5 h-5" /></a>
-              <a href="#" className="p-2 rounded-xl bg-muted hover:bg-blue-500/10 hover:text-blue-500 transition-all" aria-label="Mail Contact"><Mail className="w-5 h-5" /></a>
+              <a href="#" className="p-2 rounded-xl bg-muted hover:bg-blue-500/10 hover:text-blue-500 transition-all" aria-label="Project Repository"><Github className="w-5 h-5" /></a>
+              <a href="#" className="p-2 rounded-xl bg-muted hover:bg-blue-500/10 hover:text-blue-500 transition-all" aria-label="Professional Feed"><Linkedin className="w-5 h-5" /></a>
+              <a href="#" className="p-2 rounded-xl bg-muted hover:bg-blue-500/10 hover:text-blue-500 transition-all" aria-label="Support Contact Email"><Mail className="w-5 h-5" /></a>
             </div>
           </div>
         </div>
 
         <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Robotic Arm System Environment. Built open source.
+            &copy; {new Date().getFullYear()} Robotic Arm System Architecture. Distributed open source.
           </p>
           <div className="flex gap-6 text-xs text-muted-foreground font-medium">
-            <a href="#" className="hover:text-blue-500 transition-colors">Hardware Schematics</a>
-            <a href="#" className="hover:text-blue-500 transition-colors">Software Licenses</a>
+            <a href="#" className="hover:text-blue-500 transition-colors">Schematic Files</a>
+            <a href="#" className="hover:text-blue-500 transition-colors">Software Licensing</a>
           </div>
         </div>
       </div>
@@ -960,7 +960,7 @@ export default function App() {
           <div className="container mx-auto px-6 max-w-3xl text-center">
             <h2 className="text-3xl font-black mb-2">System Topology</h2>
             <p className="text-sm text-muted-foreground mb-12 max-w-md mx-auto">
-              Real-time message routing tracking commands directly from application execution maps to individual structural servo motors.
+              Real-time messaging pathways transmitting instruction packets directly from your phone to joint level servo arrays.
             </p>
             <div className="bg-background border border-border rounded-3xl p-6 shadow-sm">
               <ArchitectureCanvas isDark={isDark} />
